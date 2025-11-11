@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clearview Prep - Legal Tutoring</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0A1F44;
+      --primary-hover: #091A38;
+      --gold: #F2C14E;
+      --gold-dark: #D9A93A;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      background: white;
+      line-height: 1.6;
+    }
+    section {
+        padding: 4rem 0!important;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: transparent;
+      backdrop-filter: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(10, 31, 68, 0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      text-decoration: none;
+      background: transparent;
+      padding: 6px 14px 6px 6px;
+      border-radius: 12px;
+      position: relative;
+      border: 2px solid transparent;
+      background-image: linear-gradient(transparent, transparent), linear-gradient(135deg, rgb(255 255 255 / 0%), rgb(255 255 255 / 12%), rgb(255 255 255 / 19%));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+
+    header:not(.scrolled) .logo {
+      background-image: linear-gradient(transparent, transparent), linear-gradient(135deg, rgb(255 255 255 / 0%), rgb(255 255 255 / 12%), rgb(255 255 255 / 19%));
+    }
+
+    .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #ffe739 0%, #ffd700 50%, #ffb800 100%);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    margin-right: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    header:not(.scrolled) .logo-icon {
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .logo-text h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+      line-height: 1;
+    }
+
+    header:not(.scrolled) .logo-text h1 {
+      color: white;
+    }
+
+    .logo-text h1 .prep {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 60;
+    }
+
+    .mobile-menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    header:not(.scrolled) .mobile-menu-toggle span {
+      background: white;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+
+    /* Navigation */
+    nav {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    @media (min-width: 768px) {
+      nav {
+        display: flex;
+      }
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 767px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 80px 2rem 2rem;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 55;
+        overflow-y: auto;
+      }
+
+      nav.active {
+        right: 0;
+        display: flex;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 12px 0;
+        color: var(--primary) !important;
+        border-bottom: 1px solid rgba(10, 31, 68, 0.1);
+      }
+
+      nav .btn-primary {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center;
+        background: var(--primary) !important;
+        color: white !important;
+      }
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    header:not(.scrolled) nav a:not(.btn-primary) {
+      color: white;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    header:not(.scrolled) .btn-primary {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary);
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 50;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-overlay {
+        display: none !important;
+      }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--gold);
+      color: var(--primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(242, 193, 78, 0.1);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 8rem 0!important;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(10, 31, 68, 0.85) 0%, rgba(10, 31, 68, 0.7) 100%),
+                  url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(242, 193, 78, 0.15) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      max-width: 48rem;
+      margin-left: auto;
+      margin-right: auto;
+      background: linear-gradient(
+        90deg,
+        #e8f1ff 0%,
+        #f5f9ff 25%,
+        #ffffff 50%,
+        #f5f9ff 75%,
+        #e8f1ff 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 6s linear infinite;
+      text-shadow: none;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+
+    .hero-description {
+      margin-top: 1.25rem;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-buttons {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .hero .btn-primary {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero .btn-primary:hover {
+      background: white;
+    }
+
+    .hero .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: white;
+    }
+
+    .trust-row {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.9);
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Metrics */
+    .metrics {
+      background: #f3f4f6;
+      color: #0b1e36;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metrics::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(800px 200px at 50% -100px, rgba(142,197,255,.25), rgba(142,197,255,0) 70%),
+        linear-gradient(180deg, rgba(15,40,67,.06), rgba(15,40,67,0)),
+        repeating-linear-gradient(0deg, transparent 0 23px, rgba(0,0,0,.06) 24px),
+        repeating-linear-gradient(90deg, transparent 0 23px, rgba(0,0,0,.06) 24px);
+    }
+
+    .metrics > *, .metrics .container, .metrics .metrics-grid, .metrics .metric {
+      position: relative;
+      z-index: 1;
+    }
+
+    .metrics-surface {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 1000px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(90deg, #0f2843, #3ea3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .metric-label {
+      margin-top: 10px;
+      color: #4b5563;
+      font-weight: 700;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    h2 {
+      font-family: 'Merriweather', serif;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      margin: 0 0 16px;
+      text-align: center;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 6px;
+      margin: 16px auto 16px;
+      border-radius: 999px;
+    }
+
+    /* Services */
+    #services {
+      background: var(--primary);
+      color: white;
+      padding: 4rem 0;
+    }
+
+    #services h2 {
+      background: linear-gradient(90deg, var(--gold), #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #services h2::after {
+      background: linear-gradient(90deg, #ffe27a, #8ec5ff);
+    }
+
+    .section__subtitle {
+        margin: 0 auto 36px;
+        text-align: center;
+        max-width: 56%;
+    }
+
+    @media (max-width: 768px) {
+      .section__subtitle {
+        max-width: 95%;
+      }
+    }
+
+    #services .section__subtitle,
+    #testimonials .section__subtitle {
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    #booking .section__subtitle,
+    #contact .section__subtitle {
+        color: #475569;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    @media (max-width: 1000px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    .service-title {
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 800;
+      margin: 0 0 10px;
+      color: white;
+    }
+
+    .service-copy {
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 14px;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #e7edf9;
+    }
+
+    .check {
+      flex: 0 0 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(255, 213, 74, 0.18);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .check svg {
+      width: 14px;
+      height: 14px;
+      color: var(--gold);
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #0b1e36;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .btn-dark:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Booking */
+    #booking h2 {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #booking h2::after {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+    }
+
+    .booking-embed {
+      margin-top: 2rem;
+      max-width: 64rem;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(10, 31, 68, 0.13);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .booking-embed iframe {
+      width: 100%;
+      height: 1200px;
+      border: 0;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .booking-embed {
+        border-radius: 0.5rem;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        max-width: calc(100% + 3rem);
+      }
+
+      .booking-embed iframe {
+        height: 1400px;
+      }
+    }
+
+    .booking-link {
+      margin-top: 1rem;
+      text-align: right;
+    }
+
+    /* Testimonials */
+    #testimonials {
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #testimonials h2 {
+      background: linear-gradient(90deg, var(--gold), #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #testimonials h2::after {
+      background: linear-gradient(90deg, #ffe27a, #8ec5ff);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1000px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .testimonial {
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: none;
+    }
+
+    .stars {
+      display: flex;
+      gap: 6px;
+      margin: 0 0 16px;
+      color: var(--gold);
+    }
+
+    .star {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+
+    .sr-only {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .testimonial blockquote {
+      margin: 0 0 20px;
+      color: rgba(255, 255, 255, 0.92);
+      font-style: italic;
+      line-height: 1.65;
+    }
+
+    .testimonial .name {
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: white;
+    }
+
+    .testimonial .role {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* About */
+    #about {
+      background: var(--primary);
+      color: white;
+      padding: 0;
+    }
+
+    #about h2 {
+      background: linear-gradient(90deg, var(--gold), #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: left;
+    }
+
+    #about h2::after {
+      background: linear-gradient(90deg, #ffe27a, #8ec5ff);
+      margin: 16px 0 16px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: 0;
+      align-items: stretch;
+      min-height: 600px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .about__photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px 0 0 18px;
+    }
+
+    @media (max-width: 900px) {
+      .about__photo {
+        border-radius: 18px 18px 0 0;
+      }
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 88px 80px;
+    }
+
+    @media (max-width: 1200px) {
+      .about-content {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-content {
+        padding: 60px 24px;
+      }
+    }
+
+    .about-content h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: white;
+    }
+
+    .about-content p {
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 24px;
+      line-height: 1.7;
+    }
+
+    .about-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .about-list .star-icon {
+      flex: 0 0 24px;
+      height: 24px;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+
+    /* Mission */
+    .mission-content {
+      max-width: 56rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .mission-content p {
+      margin-top: 1.25rem;
+      color: #475569;
+      line-height: 1.75;
+    }
+
+    /* Contact */
+    #contact {
+      background: #f3f4f6;
+      color: #0b1e36;
+      padding: 4rem 0;
+    }
+
+    #contact .container {
+      max-width: 800px;
+    }
+
+    #contact h2 {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #contact h2::after {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-weight: 600;
+      color: #0b1e36;
+    }
+
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="email"],
+    .field select,
+    .field textarea {
+      appearance: none;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 14px;
+      font: 16px/1.4 inherit;
+      color: #111827;
+    }
+
+    .field textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #123a6b;
+      box-shadow: 0 0 0 3px rgba(18, 58, 107, 0.15);
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #123a6b;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Call Section */
+    .call-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 18px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .call-section h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0b1e36;
+      margin: 0 0 1rem;
+    }
+
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+
+    .btn-call:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(10, 31, 68, 0.13);
+      background: white;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      text-decoration: none;
+      background: transparent;
+      padding: 6px 14px 6px 6px;
+      border-radius: 12px;
+      position: relative;
+      border: 2px solid transparent;
+      background-image: linear-gradient(transparent, transparent), linear-gradient(135deg, rgb(255 255 255 / 0%), rgb(255 255 255 / 12%), rgb(255 255 255 / 19%));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+
+    .footer-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #ffe739 0%, #ffd700 50%, #ffb800 100%);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      margin-right: 8px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-logo-text h3 {
+      font-size: 1.25rem !important;
+      font-weight: 700 !important;
+      color: var(--primary);
+      margin: 0;
+      line-height: 1 !important;
+      font-family: 'Merriweather', serif;
+      text-align: left !important;
+      letter-spacing: 0 !important;
+    }
+
+    .footer-logo-text h3::after {
+      display: none !important;
+    }
+
+    .footer-logo-text h3 .prep {
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .footer-copyright {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <div class="logo-icon">
+            <i data-lucide="scale" width="18" height="18"></i>
+          </div>
+          <div class="logo-text">
+            <h1>Clearview <span class="prep">Prep</span></h1>
+          </div>
+        </a>
+
+        <!-- Hamburger Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav id="mobileNav">
+          <a href="#services">Services</a>
+          <a href="#testimonials">Results</a>
+          <a href="#about">About</a>
+          <a href="#booking">Booking</a>
+          <a href="#contact" class="btn-primary">
+            Book a Consult <i data-lucide="calendar" width="16" height="16"></i>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge">
+        <i data-lucide="scale" width="14" height="14"></i> Premium Legal Tutoring
+      </span>
+      <h1>Legal mastery,<br>made simple.</h1>
+      <p class="hero-description">
+        One-to-one LSAT, law school, and bar exam tutoring designed by lawyers. Structure, strategy, and results—without burnout.
+      </p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn-primary">
+          View Services <i data-lucide="arrow-right" width="16" height="16"></i>
+        </a>
+        <a href="#booking" class="btn-secondary">
+          Schedule Now <i data-lucide="calendar" width="16" height="16"></i>
+        </a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">
+          <i data-lucide="star" width="16" height="16" style="color: var(--gold);"></i>
+          4.9/5 from student reviews
+        </div>
+        <div>NYC • Long Island • Remote Nationwide</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="metrics">
+    <div class="container">
+      <div class="metrics-surface">
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-value">99%</div>
+            <div class="metric-label">Score Improvement</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">175+</div>
+            <div class="metric-label">Top LSAT Scores</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">95%</div>
+            <div class="metric-label">Bar Pass Rate</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">10+</div>
+            <div class="metric-label">Years Avg. Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section__subtitle">Targeted coaching across LSAT, law school success, and bar exam preparation—delivered with clear systems and accountability.</p>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <article class="service-card">
+          <h3 class="service-title">LSAT Tutoring</h3>
+          <p class="service-copy">Targeted prep across LR, RC, and Games with timing systems, error logs, and high-yield drills.</p>
+          <ul class="service-list">
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Diagnostic &amp; custom plan</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Timing mastery systems</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Weekly accountability</li>
+          </ul>
+          <a class="btn-dark" href="#contact">Learn More</a>
+        </article>
+
+        <!-- Service 2 -->
+        <article class="service-card">
+          <h3 class="service-title">Law School Support</h3>
+          <p class="service-copy">1L–3L coaching for outlines, hypos, cold-call prep, and legal writing—so you're execution-ready.</p>
+          <ul class="service-list">
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Attack outlines</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> IRAC/CRAC reps</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Memo/brief feedback</li>
+          </ul>
+          <a class="btn-dark" href="#contact">Learn More</a>
+        </article>
+
+        <!-- Service 3 -->
+        <article class="service-card">
+          <h3 class="service-title">Bar Exam Coaching</h3>
+          <p class="service-copy">MBE pattern training, MEE issue trees, and MPT templates—so you pass with confidence.</p>
+          <ul class="service-list">
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MBE analytics</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MEE checklists</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MPT timeboxing</li>
+          </ul>
+          <a class="btn-dark" href="#contact">Learn More</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking" style="background: white; border-top: 1px solid rgba(10, 31, 68, 0.13);">
+    <div class="container">
+      <h2>Schedule Your Session</h2>
+      <p class="section__subtitle">Pick a time that works for you—consults, LSAT/1L/Bar sessions, and intensives.</p>
+
+      <div class="booking-embed">
+
+        <iframe
+          id="acuityFrame"
+          src="https://app.acuityscheduling.com/schedule.php?owner=37428369&embed=1"
+          title="Acuity Scheduler"
+          loading="lazy"
+          allowtransparency="true">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <h2>Client Testimonials</h2>
+      <p class="section__subtitle">Real outcomes from students who've transformed their legal careers with structured coaching and accountability.</p>
+
+      <div class="testimonials-grid">
+        <!-- Card 1 -->
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">
+            <span class="sr-only">5 out of 5 stars</span>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <blockquote>"From 142 to 178 on the LSAT. Admitted to Harvard Law. Alexandra's methods are unmatched."</blockquote>
+          <p class="name">Maya Chen</p>
+          <p class="role">Harvard Law School, Class of 2026</p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">
+            <span class="sr-only">5 out of 5 stars</span>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <blockquote>"Passed the New York Bar on first attempt after two prior failures. The essay framework was transformative."</blockquote>
+          <p class="name">James Patel</p>
+          <p class="role">Associate, Cravath, Swaine &amp; Moore</p>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="testimonial">
+          <div class="stars" aria-label="5 out of 5 stars">
+            <span class="sr-only">5 out of 5 stars</span>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <blockquote>"Top 5% at Yale Law. Weekly drills made me confident in any classroom setting."</blockquote>
+          <p class="name">Sofia Ramirez</p>
+          <p class="role">Yale Law School, Class of 2025</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <img class="about__photo" src="images/Kamal.jpeg" alt="Portrait of the owner" />
+        <div class="about-content">
+          <h2>About the Owner</h2>
+          <h3>Kamaljit Singh</h3>
+          <p>An in-house General Counsel and former tutor who's coached students across LSAT, law school, and the bar. His approach blends elite pedagogy with real-world practice: clear frameworks, weekly accountability, and measurable outcomes.</p>
+          <ul class="about-list">
+            <li>
+              <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Fordham Law alum; energy & infrastructure GC experience</span>
+            </li>
+            <li>
+              <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Time management and test-day execution are core focus areas</span>
+            </li>
+            <li>
+              <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>In-person (NYC/Long Island) + remote nationwide</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="section__subtitle">Questions about tutoring, packages, or availability? Send a note and we'll get back within one business day.</p>
+
+      <form class="contact-form" action="#" method="post" onsubmit="return false;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" />
+        </div>
+        <div class="field field--full">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field field--full">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" />
+        </div>
+        <div class="field field--full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us a bit about your goals…" required></textarea>
+        </div>
+        <div class="field field--full">
+          <label class="consent">
+            <input type="checkbox" required style="margin-top:3px" />
+            I consent to be contacted about my inquiry and agree to the privacy policy.
+          </label>
+        </div>
+        <div class="field field--full" style="margin-top:4px">
+          <button class="btn" type="submit">Send Message</button>
+        </div>
+      </form>
+
+      <div class="call-section">
+        <h3>Need answers sooner?</h3>
+        <a href="tel:+19178349057" class="btn-call">
+          <i data-lucide="phone" width="20" height="20"></i>
+          Click to Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-icon">
+            <i data-lucide="scale" width="18" height="18"></i>
+          </div>
+          <div class="footer-logo-text">
+            <h3>Clearview <span class="prep">Prep</span></h3>
+          </div>
+        </a>
+        <div class="footer-copyright">
+          © <span id="year"></span> Clearview Prep. All rights reserved.
+        </div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#about">About</a>
+          <a href="#booking">Booking</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Header scroll effect
+    const header = document.querySelector('header');
+
+    function handleScroll() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+
+    // Check initial state
+    handleScroll();
+
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function toggleMobileMenu() {
+      mobileMenuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      mobileOverlay.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      mobileMenuToggle.classList.remove('active');
+      mobileNav.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Toggle menu on button click
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when overlay is clicked
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu when a nav link is clicked
+    const navLinks = mobileNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on window resize if desktop size
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        closeMobileMenu();
+      }
+    });
+
+    // Auto-resize Acuity iframe to fit content
+    const acuityFrame = document.getElementById('acuityFrame');
+
+    window.addEventListener('message', function(event) {
+      // Listen for messages from Acuity scheduler
+      if (event.origin === 'https://app.acuityscheduling.com') {
+        if (event.data && event.data.height) {
+          acuityFrame.style.height = event.data.height + 'px';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
