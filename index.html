@@ -579,19 +579,44 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 28px;
+    }
+
+    .services-grid .service-card {
+      grid-column: span 2;
+    }
+
+    .services-grid .service-card:nth-child(4) {
+      grid-column: 2 / 4;
+    }
+
+    .services-grid .service-card:nth-child(5) {
+      grid-column: 4 / 6;
     }
 
     @media (max-width: 1000px) {
       .services-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .services-grid .service-card {
+        grid-column: span 1;
+      }
+
+      .services-grid .service-card:nth-child(4),
+      .services-grid .service-card:nth-child(5) {
+        grid-column: span 1;
+      }
     }
 
     @media (max-width: 640px) {
       .services-grid {
         grid-template-columns: 1fr;
+      }
+
+      .services-grid .service-card {
+        grid-column: span 1;
       }
     }
 
@@ -907,6 +932,17 @@
       text-align: center;
     }
 
+    .mission-content h2 {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .mission-content h2::after {
+      background: linear-gradient(90deg, #0f2843, #8ec5ff);
+    }
+
     .mission-content p {
       margin-top: 1.25rem;
       color: #475569;
@@ -921,7 +957,57 @@
     }
 
     #contact .container {
-      max-width: 800px;
+      max-width: 1100px;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .contact-info {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 18px;
+      border: 2px solid #e5e7eb;
+      height: fit-content;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-info h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 0.5rem;
+    }
+
+    .contact-info p {
+      color: #475569;
+      margin: 0 0 2rem;
+      font-size: 1.05rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: #475569;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+      font-size: 1rem;
+      padding: 0.75rem;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
     }
 
     #contact h2 {
@@ -1015,26 +1101,59 @@
     /* Call Section */
     .call-section {
       margin-top: 3rem;
-      padding: 2rem;
-      background: white;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2952 100%);
       border-radius: 18px;
-      text-align: center;
-      border: 1px solid #e5e7eb;
+      border: 2px solid transparent;
+      background-image: 
+        linear-gradient(135deg, var(--primary) 0%, #0d2952 100%),
+        linear-gradient(135deg, var(--gold), #ffe27a, var(--gold));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .call-section {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .call-section-text {
+      flex: 1;
     }
 
     .call-section h3 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: 700;
-      color: #0b1e36;
-      margin: 0 0 1rem;
+      color: white;
+      margin: 0 0 0.5rem;
+      text-align: left;
+    }
+
+    @media (max-width: 640px) {
+      .call-section h3 {
+        text-align: center;
+      }
+    }
+
+    .call-section p {
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+      font-size: 1.05rem;
     }
 
     .btn-call {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--primary);
-      color: white;
+      background: white;
+      color: var(--primary);
       padding: 14px 24px;
       border-radius: 12px;
       font-weight: 700;
@@ -1042,6 +1161,7 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: all 0.2s;
       font-size: 1rem;
+      white-space: nowrap;
     }
 
     .btn-call:hover {
@@ -1186,22 +1306,15 @@
       </span>
       <h1>Legal mastery,<br>made simple.</h1>
       <p class="hero-description">
-        One-to-one LSAT, law school, and bar exam tutoring designed by lawyers. Structure, strategy, and results—without burnout.
+        One-to-one LSAT, law school, and bar exam tutoring led by 3Ls and legal professionals. Every session blends structure, strategy, and mentorship to help you perform your best.
       </p>
       <div class="hero-buttons">
-        <a href="#services" class="btn-primary">
-          View Services <i data-lucide="arrow-right" width="16" height="16"></i>
-        </a>
-        <a href="#booking" class="btn-secondary">
-          Schedule Now <i data-lucide="calendar" width="16" height="16"></i>
+        <a href="#booking" class="btn-primary">
+          Schedule a Free Consult <i data-lucide="calendar" width="16" height="16"></i>
         </a>
       </div>
       <div class="trust-row">
-        <div class="trust-item">
-          <i data-lucide="star" width="16" height="16" style="color: var(--gold);"></i>
-          4.9/5 from student reviews
-        </div>
-        <div>NYC • Long Island • Remote Nationwide</div>
+        <div>Trusted by aspiring lawyers across NYC, Long Island, and nationwide.</div>
       </div>
     </div>
   </section>
@@ -1232,6 +1345,17 @@
     </div>
   </section>
 
+  <!-- Mission -->
+  <section style="background: white; padding: 4rem 0;">
+    <div class="container">
+      <div class="mission-content">
+        <h2>Our Mission</h2>
+        <p>Clearview Prep was created to make legal education practical, personal, and empowering. We help students not only raise their scores but think, write, and communicate like lawyers.</p>
+        <p>Each program combines academic mastery with professional development to prepare students for success in law school, on the bar exam, and in their legal careers.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Services -->
   <section id="services">
     <div class="container">
@@ -1241,38 +1365,37 @@
       <div class="services-grid">
         <!-- Service 1 -->
         <article class="service-card">
-          <h3 class="service-title">LSAT Tutoring</h3>
-          <p class="service-copy">Targeted prep across LR, RC, and Games with timing systems, error logs, and high-yield drills.</p>
-          <ul class="service-list">
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Diagnostic &amp; custom plan</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Timing mastery systems</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Weekly accountability</li>
-          </ul>
-          <a class="btn-dark" href="#contact">Learn More</a>
+          <h3 class="service-title">LSAT Coaching</h3>
+          <p class="service-copy">Build logic, pacing, and test-day precision with personalized instruction from top-scoring tutors and legal professionals.</p>
+          <a class="btn-dark" href="#booking">Book LSAT Coaching</a>
         </article>
 
         <!-- Service 2 -->
         <article class="service-card">
-          <h3 class="service-title">Law School Support</h3>
-          <p class="service-copy">1L–3L coaching for outlines, hypos, cold-call prep, and legal writing—so you're execution-ready.</p>
-          <ul class="service-list">
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Attack outlines</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> IRAC/CRAC reps</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> Memo/brief feedback</li>
-          </ul>
-          <a class="btn-dark" href="#contact">Learn More</a>
+          <h3 class="service-title">Law School Admissions Coaching</h3>
+          <p class="service-copy">Get one-on-one help with your personal statement, resume, and interviews. Learn how to tell your story effectively and position yourself for admission to top law schools.</p>
+          <a class="btn-dark" href="#booking">Start Application Coaching</a>
         </article>
 
         <!-- Service 3 -->
         <article class="service-card">
-          <h3 class="service-title">Bar Exam Coaching</h3>
-          <p class="service-copy">MBE pattern training, MEE issue trees, and MPT templates—so you pass with confidence.</p>
-          <ul class="service-list">
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MBE analytics</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MEE checklists</li>
-            <li><span class="check"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span> MPT timeboxing</li>
-          </ul>
-          <a class="btn-dark" href="#contact">Learn More</a>
+          <h3 class="service-title">Law School Tutoring</h3>
+          <p class="service-copy">Work with experienced 3Ls and attorneys to master exams, outlines, and legal writing. Learn how to brief cases, analyze hypotheticals, and think like a lawyer.</p>
+          <a class="btn-dark" href="#booking">View Law School Support</a>
+        </article>
+
+        <!-- Service 4 -->
+        <article class="service-card">
+          <h3 class="service-title">Bar Exam Preparation</h3>
+          <p class="service-copy">Train with bar-passed lawyers who teach proven essay frameworks, MBE accuracy, and time management techniques that deliver results.</p>
+          <a class="btn-dark" href="#booking">Explore Bar Prep Options</a>
+        </article>
+
+        <!-- Service 5 -->
+        <article class="service-card">
+          <h3 class="service-title">Career, Internship, and Resume Coaching</h3>
+          <p class="service-copy">Receive personalized guidance on resumes, cover letters, internships, and networking. Learn how to connect with mentors, stand out in interviews, and build lasting professional confidence.</p>
+          <a class="btn-dark" href="#booking">Book a Mentorship Session</a>
         </article>
       </div>
     </div>
@@ -1281,8 +1404,8 @@
   <!-- Booking -->
   <section id="booking" style="background: white; border-top: 1px solid rgba(10, 31, 68, 0.13);">
     <div class="container">
-      <h2>Schedule Your Session</h2>
-      <p class="section__subtitle">Pick a time that works for you—consults, LSAT/1L/Bar sessions, and intensives.</p>
+      <h2>Ready to begin?</h2>
+      <p class="section__subtitle">Book your session directly through our scheduling link below.</p>
 
       <div class="booking-embed">
 
@@ -1300,53 +1423,29 @@
   <!-- Testimonials -->
   <section id="testimonials">
     <div class="container">
-      <h2>Client Testimonials</h2>
+      <h2>Student Success Stories</h2>
       <p class="section__subtitle">Real outcomes from students who've transformed their legal careers with structured coaching and accountability.</p>
 
       <div class="testimonials-grid">
         <!-- Card 1 -->
         <article class="testimonial">
-          <div class="stars" aria-label="5 out of 5 stars">
-            <span class="sr-only">5 out of 5 stars</span>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote>"From 142 to 178 on the LSAT. Admitted to Harvard Law. Alexandra's methods are unmatched."</blockquote>
-          <p class="name">Maya Chen</p>
-          <p class="role">Harvard Law School, Class of 2026</p>
+          <blockquote>"Clearview Prep helped me raise my LSAT score by 14 points and gave me the confidence I needed for interviews."</blockquote>
+          <p class="name">—J.D. Candidate</p>
+          <p class="role">Columbia Law</p>
         </article>
 
         <!-- Card 2 -->
         <article class="testimonial">
-          <div class="stars" aria-label="5 out of 5 stars">
-            <span class="sr-only">5 out of 5 stars</span>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote>"Passed the New York Bar on first attempt after two prior failures. The essay framework was transformative."</blockquote>
-          <p class="name">James Patel</p>
-          <p class="role">Associate, Cravath, Swaine &amp; Moore</p>
+          <blockquote>"The mentorship went far beyond test prep. I learned how to write my personal statement, strengthen my resume, and approach my legal career strategically."</blockquote>
+          <p class="name">—Law Student</p>
+          <p class="role">Fordham Law</p>
         </article>
 
         <!-- Card 3 -->
         <article class="testimonial">
-          <div class="stars" aria-label="5 out of 5 stars">
-            <span class="sr-only">5 out of 5 stars</span>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-            <svg class="star" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          </div>
-          <blockquote>"Top 5% at Yale Law. Weekly drills made me confident in any classroom setting."</blockquote>
-          <p class="name">Sofia Ramirez</p>
-          <p class="role">Yale Law School, Class of 2025</p>
+          <blockquote>"I passed the bar on my first attempt thanks to the structured approach and personalized coaching. Highly recommend to anyone serious about succeeding."</blockquote>
+          <p class="name">—Attorney</p>
+          <p class="role">New York Bar</p>
         </article>
       </div>
     </div>
@@ -1359,20 +1458,22 @@
         <img class="about__photo" src="images/Kamal.jpeg" alt="Portrait of the owner" />
         <div class="about-content">
           <h2>About the Owner</h2>
-          <h3>Kamaljit Singh</h3>
-          <p>An in-house General Counsel and former tutor who's coached students across LSAT, law school, and the bar. His approach blends elite pedagogy with real-world practice: clear frameworks, weekly accountability, and measurable outcomes.</p>
+          <h3>Kamal Singh</h3>
+          <p>General Counsel | Educator | Former Big Law Attorney</p>
+          <p>Kamal Singh is a General Counsel and educator who brings the discipline of Big Law and the insight of real-world experience to every student she teaches. She has helped aspiring lawyers excel on the LSAT, in law school, and on the bar exam by focusing on structure, strategy, and professional growth.</p>
+          <p>At Clearview Prep, every student learns from 3Ls and legal professionals who teach and mentor with clarity, accountability, and purpose.</p>
           <ul class="about-list">
             <li>
               <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <span>Fordham Law alum; energy & infrastructure GC experience</span>
+              <span>Fordham Law alum with experience at top international law firms and as General Counsel in the energy and infrastructure sectors</span>
             </li>
             <li>
               <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <span>Time management and test-day execution are core focus areas</span>
+              <span>Specialties: LSAT strategy, law school success frameworks, and bar exam performance coaching</span>
             </li>
             <li>
               <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <span>In-person (NYC/Long Island) + remote nationwide</span>
+              <span>Available: in-person (NYC / Long Island) and remotely nationwide</span>
             </li>
           </ul>
         </div>
@@ -1386,41 +1487,57 @@
       <h2>Contact Us</h2>
       <p class="section__subtitle">Questions about tutoring, packages, or availability? Send a note and we'll get back within one business day.</p>
 
-      <form class="contact-form" action="#" method="post" onsubmit="return false;">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required />
+      <div class="contact-wrapper">
+        <form class="contact-form" action="#" method="post" onsubmit="return false;">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" />
+          </div>
+          <div class="field field--full">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field field--full">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" />
+          </div>
+          <div class="field field--full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about your goals…" required></textarea>
+          </div>
+          <div class="field field--full">
+            <label class="consent">
+              <input type="checkbox" required style="margin-top:3px" />
+              I consent to be contacted about my inquiry and agree to the privacy policy.
+            </label>
+          </div>
+          <div class="field field--full" style="margin-top:4px">
+            <button class="btn" type="submit">Send Message</button>
+          </div>
+        </form>
+
+        <div class="contact-info">
+          <h3>Let's Connect</h3>
+          <p>We'd love to hear from you.</p>
+          <div class="contact-info-item">
+            📍 NYC • Long Island • Remote Nationwide
+          </div>
+          <div class="contact-info-item">
+            📧 info@clearviewprep.com
+          </div>
         </div>
-        <div class="field">
-          <label for="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" />
-        </div>
-        <div class="field field--full">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required />
-        </div>
-        <div class="field field--full">
-          <label for="subject">Subject</label>
-          <input id="subject" name="subject" type="text" />
-        </div>
-        <div class="field field--full">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us a bit about your goals…" required></textarea>
-        </div>
-        <div class="field field--full">
-          <label class="consent">
-            <input type="checkbox" required style="margin-top:3px" />
-            I consent to be contacted about my inquiry and agree to the privacy policy.
-          </label>
-        </div>
-        <div class="field field--full" style="margin-top:4px">
-          <button class="btn" type="submit">Send Message</button>
-        </div>
-      </form>
+      </div>
 
       <div class="call-section">
-        <h3>Need answers sooner?</h3>
-        <a href="tel:+19178345082" class="btn-call">
+        <div class="call-section-text">
+          <h3>Need answers sooner?</h3>
+          <p>Give us a call and we'll connect you right away.</p>
+        </div>
+        <a href="tel:+19178349057" class="btn-call">
           <i data-lucide="phone" width="20" height="20"></i>
           Click to Call
         </a>
